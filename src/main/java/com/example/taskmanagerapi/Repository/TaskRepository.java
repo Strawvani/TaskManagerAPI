@@ -22,7 +22,7 @@ public class TaskRepository {
     }
 
     public Task save(Task task) {
-        if (task.getId() == 0) {
+        if (task.getId() == null || task.getId() == 0) { // ← null check added
             task.setId(nextId++);
         }
         tasks.put(task.getId(), task);

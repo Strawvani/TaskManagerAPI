@@ -35,9 +35,9 @@ public class TaskService {
         return task;
     }
 
-    public String addTask(Task task){
-        taskRepository.save(task);
-        return task.getTitle() + " was Successfully Added to the Tasklist!";
+    public Task addTask(String title, String description){
+        Task task = new Task(0,title,description);
+        return taskRepository.save(task);
     }
 
     public boolean removeTaskByID(int id){
@@ -45,5 +45,16 @@ public class TaskService {
             throw new TaskNotFoundException(id);
         }
         return taskRepository.deleteByID(id);
+    }
+
+    public Task updateTask(int id, Task updatedTask) {
+        Task existing = taskRepository.findByID(id);
+        if (existing == null) {
+            throw new TaskNotFoundException(id);
+        }
+        existing.setTitle(updatedTask.getTitle());
+        existing.setDescription(updatedTask.getDescription());
+        existing.setCompleted(updatedTask.isCompleted());
+        return taskRepository.save(existing);
     }
 }

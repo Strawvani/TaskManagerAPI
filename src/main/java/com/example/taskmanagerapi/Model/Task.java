@@ -2,20 +2,27 @@ package com.example.taskmanagerapi.Model;
 
 import java.time.LocalDateTime;
 
+
+
 public class Task {
-    private int id;
+    private Integer id;
     private String title;
     private String description;
     private boolean completed = false;
     private LocalDateTime createdDate;
 
-    public Task(int id, String title, String description) {
+    public Task(){
+
+    }
+
+    public Task(Integer id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.createdDate = LocalDateTime.now();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -35,7 +42,7 @@ public class Task {
         return createdDate;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
